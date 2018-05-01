@@ -1,0 +1,6 @@
+framework module JOSlider {
+  umbrella header "JOSlider-umbrella.h"
+
+  export *
+  module * { export * }
+}

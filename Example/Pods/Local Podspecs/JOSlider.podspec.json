@@ -1,0 +1,22 @@
+{
+  "name": "JOSlider",
+  "version": "0.1.0",
+  "summary": "A short description of JOSlider.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/lojals/JOSlider",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "lojals": "jorge.ovalle@wizeline.com"
+  },
+  "source": {
+    "git": "https://github.com/lojals/JOSlider.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "JOSlider/Classes/**/*"
+}
