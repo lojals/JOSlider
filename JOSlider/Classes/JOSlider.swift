@@ -15,6 +15,7 @@ public class JOSlider: UIControl {
         static let marginSpacing: CGFloat = 10
         static let selectorSize: CGFloat = 50
         static let borderWidth: CGFloat = 5
+        static let separationFromSlider: CGFloat = 20
     }
     
     // MARK: - Properties declaration
@@ -35,45 +36,35 @@ public class JOSlider: UIControl {
         }
     }
     
-    var value: Int {
+    var value: Int = 0 {
         didSet {
             setPosition(for: value)
         }
     }
     
-    private lazy var widthForLabel = {
+    private lazy var spaceFromBorder = {
         return DesignConstants.marginSpacing + (DesignConstants.selectorSize * 0.5) - DesignConstants.borderWidth
     }()
     
-    private lazy var borders: (min: CGFloat, max: CGFloat) = {
-        return (min: frame.width - widthForLabel, max: widthForLabel)
-    }()
+    private var borders: (min: CGFloat, max: CGFloat) = (0, 0)
     
-    var minValue = 10
-    var maxValue = 100
+    private var coordinateFactor: CGFloat = 0
     
     // MARK: - View components declaration
     
     private var selector: UILabel = {
         let selector = UILabel(frame: CGRect(x: 0, y: 0, width: DesignConstants.selectorSize, height: DesignConstants.selectorSize))
         selector.backgroundColor = .white
-        selector.layer.cornerRadius = selector.frame.width / 2
+        selector.layer.cornerRadius = DesignConstants.selectorSize / 2
         selector.font = UIFont.boldSystemFont(ofSize: 14)
         selector.textAlignment = .center
         selector.layer.masksToBounds = true
         return selector
     }()
     
-    private lazy var minValueLabel: UILabel = type(of: self).newLabel(title: "\(self.minValue)")
+    private lazy var minValueLabel: UILabel = type(of: self).newLabel(title: "\(self.settings.minValue)")
     
-    private lazy var maxValueLabel: UILabel = {
-        let label =  type(of: self).newLabel(title: "\(self.maxValue)")
-        return label
-    }()
-    
-    private lazy var coordinateFactor: CGFloat = {
-        return (borders.max - borders.min) / (CGFloat(maxValue) - CGFloat(minValue))
-    }()
+    private lazy var maxValueLabel: UILabel = type(of: self).newLabel(title: "\(self.settings.maxValue)")
     
     private static func newLabel(title: String) -> UILabel {
         let label =  UILabel()
@@ -84,27 +75,42 @@ public class JOSlider: UIControl {
         return label
     }
     
+    public private(set) var settings: Settings
+    
     // MARK: UIControl lyfecycle
     
-    override public init(frame: CGRect) {
-        self.value = 50
+    public init(frame: CGRect, settings: Settings = .default) {
+        self.settings = settings
         super.init(frame: frame)
         
-        defer {
-            self.value = 50
-        }
+        setupUIComponents()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        self.settings = .default
+        super.init(coder: aDecoder)
         
+        setupUIComponents()
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        borders = (min: spaceFromBorder, max: bounds.width - spaceFromBorder)
+        coordinateFactor = (borders.max - borders.min) / (CGFloat(settings.maxValue) - CGFloat(settings.minValue))
+        setPosition(for: value)
+    }
+    
+    private func setupUIComponents() {
         addSubview(minValueLabel)
         addSubview(maxValueLabel)
         addSubview(selector)
         
         setupUIConstraints()
+        
+        defer {
+            self.value = settings.valueByDefault
+        }
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     
     private func setupUIConstraints() {
         let views = ["minLbl": minValueLabel, "maxLbl": maxValueLabel]
@@ -117,51 +123,73 @@ public class JOSlider: UIControl {
     
     // MARK: UIView events
     
-    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 5, initialSpringVelocity: 5, options: [], animations: {
-            self.selector.center.y = (self.frame.height / 2) - 60
-        })
+    public override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        let point = touch.location(in: self)
+        beginAnimation(position: point.x)
+        return super.beginTracking(touch, with: event)
     }
     
-    override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let origin = selector.center
-        let point = touches.first?.location(in: self) ?? origin
+    public override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        let point = touch.location(in: self)
         setValue(for: point)
+        return super.continueTracking(touch, with: event)
     }
     
-    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIView.animate(withDuration: 0.2) {
-            self.selector.center.y = self.frame.height / 2
-        }
+    public override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        endAnimation()
+    }
+    
+    public override func cancelTracking(with event: UIEvent?) {
+        endAnimation()
     }
     
     private func setPosition(for value: Int) {
         let valueForScreen = CGFloat(value)
-        let xValue = ((valueForScreen - CGFloat(minValue)) * coordinateFactor) + borders.min
+        let xValue = ((valueForScreen - CGFloat(settings.minValue)) * coordinateFactor) + borders.min
         selector.text = "\(value)"
-        selector.center = CGPoint(x: xValue, y: frame.height / 2)
+        selector.center = CGPoint(x: xValue, y: bounds.midY)
     }
     
     private func setValue(for position: CGPoint) {
         let greaterThanMinX = position.x >= borders.min
         let smallerThanMaxX = position.x <= borders.max
+
+//        min(max(position, borders.min), borders.max)
+        
+        
+        print("\(borders.min) \(borders.max)")
         
         if greaterThanMinX && smallerThanMaxX {
-            value = Int((position.x - borders.min) / coordinateFactor) + minValue
+            value = Int((position.x - borders.min) / coordinateFactor) + settings.minValue
             selector.text = "\(value)"
-            selector.center = CGPoint(x: position.x, y: (frame.height / 2) - 60)
+            selector.center = CGPoint(x: position.x, y: bounds.midY - (DesignConstants.selectorSize + DesignConstants.separationFromSlider))
         } else if !greaterThanMinX {
-            selector.text = "\(minValue)"
+            selector.text = "\(settings.minValue)"
         } else if !smallerThanMaxX {
-            selector.text = "\(maxValue)"
+            selector.text = "\(settings.maxValue)"
         }
+    }
+    
+    private func beginAnimation(position: CGFloat) {
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 2.5, initialSpringVelocity: 3, options: .curveEaseInOut, animations: {
+            self.selector.center = CGPoint(x: position, y: self.bounds.midY - (DesignConstants.selectorSize + DesignConstants.separationFromSlider))
+        })
+    }
+    
+    private func endAnimation() {
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 5, initialSpringVelocity: 5, options: [], animations: {
+            self.selector.center.y = self.bounds.midY
+        })
     }
 }
 
 
 public extension JOSlider {
-    public struct Configuration {
+    public struct Settings {
         var minValue: Int
+        var maxValue: Int
+        var valueByDefault: Int
         
+        public static var `default` = Settings(minValue: 0, maxValue: 100, valueByDefault: 50)
     }
 }
