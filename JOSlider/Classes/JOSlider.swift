@@ -28,11 +28,12 @@ public class JOSlider: UIControl {
         }
     }
     
-    public var contrastColor: UIColor? {
+    @IBInspectable public var contrastColor: UIColor? {
         didSet {
             guard let contrastColor = contrastColor else { return }
             minValueLabel.textColor = contrastColor
             maxValueLabel.textColor = contrastColor
+            selector.backgroundColor = contrastColor
         }
     }
     

@@ -17,7 +17,6 @@ class ViewController: UIViewController {
 //        let slider = JOSlider(frame: CGRect(x: 10, y: 100, width: view.frame.width - 20, height: 60))
 //        slider.backgroundColor = UIColor(red: 0.17, green: 0.65, blue: 0.86, alpha: 1.00)
 //        slider.contrastColor = .white
-//        slider.layer.cornerRadius = 10
 //        view.addSubview(slider)
     }
 
