@@ -101,15 +101,15 @@ public class JOSlider: UIControl {
     }
     
     private func setupUIComponents() {
+        layer.cornerRadius = 10
+        
         addSubview(minValueLabel)
         addSubview(maxValueLabel)
         addSubview(selector)
         
         setupUIConstraints()
         
-        defer {
-            self.value = settings.valueByDefault
-        }
+        value = settings.valueByDefault
     }
     
     private func setupUIConstraints() {
@@ -125,7 +125,7 @@ public class JOSlider: UIControl {
     
     public override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let point = touch.location(in: self)
-        beginAnimation(position: point.x)
+        setValue(for: point, animated: true)
         return super.beginTracking(touch, with: event)
     }
     
@@ -150,30 +150,20 @@ public class JOSlider: UIControl {
         selector.center = CGPoint(x: xValue, y: bounds.midY)
     }
     
-    private func setValue(for position: CGPoint) {
-        let greaterThanMinX = position.x >= borders.min
-        let smallerThanMaxX = position.x <= borders.max
-
-//        min(max(position, borders.min), borders.max)
-        
-        
-        print("\(borders.min) \(borders.max)")
-        
-        if greaterThanMinX && smallerThanMaxX {
-            value = Int((position.x - borders.min) / coordinateFactor) + settings.minValue
-            selector.text = "\(value)"
-            selector.center = CGPoint(x: position.x, y: bounds.midY - (DesignConstants.selectorSize + DesignConstants.separationFromSlider))
-        } else if !greaterThanMinX {
-            selector.text = "\(settings.minValue)"
-        } else if !smallerThanMaxX {
-            selector.text = "\(settings.maxValue)"
+    private func setValue(for position: CGPoint, animated: Bool = false) {
+        let clampedPosition = min(max(position.x, borders.min), borders.max)
+        value = Int((clampedPosition - borders.min) / coordinateFactor) + settings.minValue
+        selector.text = "\(value)"
+        let newPosition = CGPoint(x: clampedPosition, y: self.bounds.midY - (DesignConstants.selectorSize + DesignConstants.separationFromSlider))
+        if animated {
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 2.5, initialSpringVelocity: 3, options: .curveEaseInOut, animations: {
+                self.selector.center = newPosition
+            })
+        } else {
+            selector.center = newPosition
         }
-    }
-    
-    private func beginAnimation(position: CGFloat) {
-        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 2.5, initialSpringVelocity: 3, options: .curveEaseInOut, animations: {
-            self.selector.center = CGPoint(x: position, y: self.bounds.midY - (DesignConstants.selectorSize + DesignConstants.separationFromSlider))
-        })
+        
+        
     }
     
     private func endAnimation() {
@@ -193,3 +183,4 @@ public extension JOSlider {
         public static var `default` = Settings(minValue: 0, maxValue: 100, valueByDefault: 50)
     }
 }
+
