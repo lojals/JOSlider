@@ -1,5 +1,4 @@
 import XCTest
-import JOSlider
 
 class Tests: XCTestCase {
     
