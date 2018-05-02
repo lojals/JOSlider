@@ -22,7 +22,7 @@ pod 'JOSlider'
 
 ## Author
 
-lojals, jorge.ovalle@wizeline.com
+lojals,  jroz9105@gmail.com
 
 ## License
 

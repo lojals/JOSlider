@@ -1,13 +1,7 @@
 PODS:
-  - FBSnapshotTestCase (2.1.4):
-    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
-  - FBSnapshotTestCase/Core (2.1.4)
-  - FBSnapshotTestCase/SwiftSupport (2.1.4):
-    - FBSnapshotTestCase/Core
   - JOSlider (0.1.0)
 
 DEPENDENCIES:
-  - FBSnapshotTestCase (~> 2.1.4)
   - JOSlider (from `../`)
 
 EXTERNAL SOURCES:
@@ -15,9 +9,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  JOSlider: 9cc94f549da37091c9f15cac8c05833a8876a0bd
+  JOSlider: 8a7a3b14830aed48c55aaedbdc8e0a4d86f9da42
 
-PODFILE CHECKSUM: d8e55d7406c77287fb5b313cab822ab6775bf859
+PODFILE CHECKSUM: cbc1fbb6e78e4ad04b96c446923a037568ab922f
 
 COCOAPODS: 1.4.0

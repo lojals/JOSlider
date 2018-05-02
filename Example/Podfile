@@ -2,10 +2,6 @@ use_frameworks!
 
 target 'JOSlider_Example' do
   pod 'JOSlider', :path => '../'
-
-  target 'JOSlider_Tests' do
-    inherit! :search_paths
-
-    pod 'FBSnapshotTestCase' , '~> 2.1.4'
-  end
+  
+  
 end

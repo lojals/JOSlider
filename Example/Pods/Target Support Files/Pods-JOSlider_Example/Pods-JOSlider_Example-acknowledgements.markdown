@@ -3,7 +3,7 @@ This application makes use of the following third party libraries:
 
 ## JOSlider
 
-Copyright (c) 2018 lojals <jorge.ovalle@wizeline.com>
+Copyright (c) 2018 lojals <jroz9105@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -9,12 +9,13 @@
     "file": "LICENSE"
   },
   "authors": {
-    "lojals": "jorge.ovalle@wizeline.com"
+    "lojals": "jroz9105@gmail.com"
   },
   "source": {
     "git": "https://github.com/lojals/JOSlider.git",
     "tag": "0.1.0"
   },
+  "social_media_url": "https://twitter.com/lojals_",
   "platforms": {
     "ios": "8.0"
   },
