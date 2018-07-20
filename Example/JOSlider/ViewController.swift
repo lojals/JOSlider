@@ -18,12 +18,11 @@ class ViewController: UIViewController {
 //        slider.backgroundColor = UIColor(red: 0.17, green: 0.65, blue: 0.86, alpha: 1.00)
 //        slider.contrastColor = .white
 //        view.addSubview(slider)
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
+    
+    
 }
 

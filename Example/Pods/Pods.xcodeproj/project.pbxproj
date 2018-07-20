@@ -14,6 +14,7 @@
 		99DDE3482E90B0712E128B68EA2DA3DE /* JOSlider-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 727A6118814F4218BD9A1E5C3AF47C79 /* JOSlider-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB510D1E68E22DA9B956A99017289FAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		D5B76904AFACCB9E49909F9934C0C0A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		ECE78B4C209E2CB200689394 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE78B4B209E2CB200689394 /* WaveView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,9 +30,9 @@
 /* Begin PBXFileReference section */
 		05C0F8F4AD182F879F4E48A00944197B /* Pods-JOSlider_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JOSlider_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		080936536BFA06418F6FCA4E987AAF82 /* JOSlider-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JOSlider-dummy.m"; sourceTree = "<group>"; };
-		1872AC298F6C0663190BB15EE200F32C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		385ED2F431DC505D42AEBD7CBBF84A18 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		40E691A9411D77BEC962CAD95F01E929 /* JOSlider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JOSlider.framework; path = JOSlider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1872AC298F6C0663190BB15EE200F32C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		385ED2F431DC505D42AEBD7CBBF84A18 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		40E691A9411D77BEC962CAD95F01E929 /* JOSlider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JOSlider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		453C971BF33BBAEB3E0B08856086117D /* Pods-JOSlider_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-JOSlider_Example-umbrella.h"; sourceTree = "<group>"; };
 		4B51D671AA474B17CC297432AE1D6781 /* Pods-JOSlider_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JOSlider_Example-resources.sh"; sourceTree = "<group>"; };
 		558177816FC78E53239126A4D79E1BFA /* Pods-JOSlider_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JOSlider_Example-frameworks.sh"; sourceTree = "<group>"; };
@@ -41,15 +42,16 @@
 		727A6118814F4218BD9A1E5C3AF47C79 /* JOSlider-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JOSlider-umbrella.h"; sourceTree = "<group>"; };
 		780F8C7974310E99BB3DC79D24350BB8 /* JOSlider.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JOSlider.xcconfig; sourceTree = "<group>"; };
 		7EF4BC1DA32E07C5D4D822004F97DC9F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8609C12E514268BE2FEF5A7BF9A2FF25 /* Pods_JOSlider_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_JOSlider_Example.framework; path = "Pods-JOSlider_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8609C12E514268BE2FEF5A7BF9A2FF25 /* Pods_JOSlider_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JOSlider_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C40FBB0BF685A7546B00465C112F6BEB /* JOSlider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JOSlider.swift; path = JOSlider/Classes/JOSlider.swift; sourceTree = "<group>"; };
 		CBE344F90574C720D88BAA6FCB5F0D57 /* JOSlider.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = JOSlider.modulemap; sourceTree = "<group>"; };
 		CD45A709E477941701F12469332DC892 /* Pods-JOSlider_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-JOSlider_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D1478F50D3D94BDA98AB7EC0196AB7BC /* Pods-JOSlider_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-JOSlider_Example-dummy.m"; sourceTree = "<group>"; };
 		D49CBF13FD8142FEBB8D52E5FC2AFD96 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECE78B4B209E2CB200689394 /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WaveView.swift; path = JOSlider/Classes/WaveView.swift; sourceTree = "<group>"; };
 		EEA57AC0906EEBC772C039FAEE610D54 /* JOSlider-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JOSlider-prefix.pch"; sourceTree = "<group>"; };
-		FBC2A2AA8C4D0334EDBE4580A1762C89 /* JOSlider.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = JOSlider.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		FBC2A2AA8C4D0334EDBE4580A1762C89 /* JOSlider.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = JOSlider.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FD413BB1EEFD67DFFDA256E0B1BBB8ED /* Pods-JOSlider_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JOSlider_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +95,7 @@
 				C40FBB0BF685A7546B00465C112F6BEB /* JOSlider.swift */,
 				BB829B0BCFA9F5041076F0790B39C00B /* Pod */,
 				496B5F69B9FBCD0080D918A93F15F04D /* Support Files */,
+				ECE78B4B209E2CB200689394 /* WaveView.swift */,
 			);
 			name = JOSlider;
 			path = ../..;
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F0908126FF6FE1CA8F00F3F5F0D2047 /* JOSlider-dummy.m in Sources */,
+				ECE78B4C209E2CB200689394 /* WaveView.swift in Sources */,
 				947E06F787B7CE5A9FCE63C0E4EC84B0 /* JOSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

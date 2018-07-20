@@ -25,6 +25,7 @@ public class JOSlider: UIControl {
             guard let backgroundColor = backgroundColor else { return }
             selector.layer.borderColor = backgroundColor.cgColor
             selector.layer.borderWidth = DesignConstants.borderWidth
+            wave.tintColor = backgroundColor
         }
     }
     
@@ -92,6 +93,7 @@ public class JOSlider: UIControl {
         super.init(coder: aDecoder)
         
         setupUIComponents()
+
     }
     
     public override func layoutSubviews() {
@@ -99,10 +101,16 @@ public class JOSlider: UIControl {
         borders = (min: spaceFromBorder, max: bounds.width - spaceFromBorder)
         coordinateFactor = (borders.max - borders.min) / (CGFloat(settings.maxValue) - CGFloat(settings.minValue))
         setPosition(for: value)
+        
+        wave.frame = CGRect(x: 0, y: -20, width: 40, height: 30)
     }
+    
+    lazy var wave = WaveView()
     
     private func setupUIComponents() {
         layer.cornerRadius = 10
+        
+        addSubview(wave)
         
         addSubview(minValueLabel)
         addSubview(maxValueLabel)
@@ -149,6 +157,7 @@ public class JOSlider: UIControl {
         let xValue = ((valueForScreen - CGFloat(settings.minValue)) * coordinateFactor) + borders.min
         selector.text = "\(value)"
         selector.center = CGPoint(x: xValue, y: bounds.midY)
+        wave.center.x = xValue + 1
     }
     
     private func setValue(for position: CGPoint, animated: Bool = false) {
@@ -160,10 +169,10 @@ public class JOSlider: UIControl {
             UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 2.5, initialSpringVelocity: 3, options: .curveEaseInOut, animations: {
                 self.selector.center = newPosition
             })
+            wave.animateShow()
         } else {
             selector.center = newPosition
         }
-        
         
     }
     
@@ -171,7 +180,10 @@ public class JOSlider: UIControl {
         UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 5, initialSpringVelocity: 5, options: [], animations: {
             self.selector.center.y = self.bounds.midY
         })
+        
+        wave.animateHide()
     }
+    
 }
 
 
@@ -181,7 +193,7 @@ public extension JOSlider {
         var maxValue: Int
         var valueByDefault: Int
         
-        public static var `default` = Settings(minValue: 0, maxValue: 100, valueByDefault: 50)
+        public static var `default` = Settings(minValue: 50, maxValue: 103, valueByDefault: 50)
     }
 }
 
